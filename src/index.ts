@@ -2,7 +2,7 @@ import QRCode from 'qrcode';
 import { cookieJar } from './net';
 
 function printQRCode(url: string) {
-  QRCode.toString(url, { type: 'terminal', small: true }, function (err, code) {
+  QRCode.toString(url, { type: 'utf8' }, function (err, code) {
     console.log(code);
     console.log(url);
     console.log('请使用手机扫描二维码登录');
