@@ -4,9 +4,9 @@ import { pcLogin, mbLogin } from '.';
 (async () => {
   if (process.argv[2] === 'mb') {
     console.log('获取 access_token');
-    await mbLogin();
+    console.log(await mbLogin());
   } else {
     console.log('获取 cookie');
-    await pcLogin();
+    console.log(await pcLogin());
   }
 })();

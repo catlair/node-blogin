@@ -73,7 +73,6 @@ export function getAppSign(
 ) {
   return getSign(
     {
-      ...params,
       platform: 'android',
       mobi_app: 'android',
       disable_rcmd: 0,
