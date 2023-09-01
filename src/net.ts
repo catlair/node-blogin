@@ -1,4 +1,4 @@
-import { CookieJar } from '@catlair/node-got/lib/cookie';
+import { CookieJar } from '@catlair/node-got/cookie';
 
 export const cookieJar: {
   getCookieString: () => Promise<string>;

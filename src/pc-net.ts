@@ -34,15 +34,9 @@ export function generateQRCode() {
 }
 
 export function pollQRCode(key: string) {
-  return biliHttp.get<
-    BaseResponse<{
-      url: string;
-      refresh_token: string;
-      timestamp: number;
-      code: 0 | 86038 | 86090 | 86101;
-      message: string;
-    }>
-  >(`https://passport.bilibili.com/x/passport-login/web/qrcode/poll?qrcode_key=${key}`);
+  return biliHttp.get(
+    `https://passport.bilibili.com/x/passport-login/web/qrcode/poll?qrcode_key=${key}`,
+  );
 }
 
 export function getCookie() {

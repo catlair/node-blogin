@@ -1,6 +1,6 @@
 {
   "name": "@catlair/blogin",
-  "version": "0.0.5",
+  "version": "0.0.8",
   "description": "bilibili qrcode login",
   "main": "index.js",
   "types": "index.d.ts",
@@ -17,7 +17,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@catlair/node-got": "^0.0.5",
+    "@catlair/node-got": "^0.0.8",
     "qrcode": "^1.5.1"
   },
   "devDependencies": {

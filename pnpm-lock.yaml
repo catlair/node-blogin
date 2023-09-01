@@ -5,10 +5,9 @@ specifiers:
   '@babel/core': ^7.19.3
   '@babel/preset-env': ^7.19.3
   '@babel/preset-typescript': ^7.18.6
-  '@catlair/node-got': ^0.0.5
+  '@catlair/node-got': ^0.0.8
   '@types/node': ^18.11.9
   '@types/qrcode': ^1.5.0
-  core-js: ^3.26.1
   eslint: ^8.27.0
   eslint-config-prettier: ^8.4.0
   eslint-plugin-prettier: ^4.2.1
@@ -18,8 +17,7 @@ specifiers:
   typescript: ^4.8.4
 
 dependencies:
-  '@catlair/node-got': 0.0.5
-  core-js: 3.26.1
+  '@catlair/node-got': 0.0.8
   qrcode: 1.5.1
 
 devDependencies:
@@ -27,13 +25,13 @@ devDependencies:
   '@babel/core': 7.20.5
   '@babel/preset-env': 7.20.2_@babel+core@7.20.5
   '@babel/preset-typescript': 7.18.6_@babel+core@7.20.5
-  '@types/node': 18.11.12
+  '@types/node': 18.11.15
   '@types/qrcode': 1.5.0
   eslint: 8.29.0
   eslint-config-prettier: 8.5.0_eslint@8.29.0
   eslint-plugin-prettier: 4.2.1_5dgjrgoi64tgrv3zzn3walur3u
   prettier: 2.8.1
-  ts-node: 10.9.1_r65g46xrm45gbuklnvp6xevc2y
+  ts-node: 10.9.1_ewfw2lwfc3dwdvz7r6yz2ssqyi
   typescript: 4.9.4
 
 packages:
@@ -1241,8 +1239,8 @@ packages:
       to-fast-properties: 2.0.0
     dev: true
 
-  /@catlair/node-got/0.0.5:
-    resolution: {integrity: sha512-eY7yn13PwHBZMW3jmyfuZjOONqyrQzXX281+d8daOxuv6fe7nAJ1UfylgvZs1J7Eys08bigNKImRrkOnhmkemw==}
+  /@catlair/node-got/0.0.8:
+    resolution: {integrity: sha512-OUlAfV5lOYNPyMY8pDxfp+FnkLuIqwb5KS+I+bOUGINE3TfaKFFtL4ZOG9/aRQgf2Ggo9VjttzIBDJ1fJVC36w==}
     engines: {node: '>= 12.2.0'}
     dependencies:
       got: 11.8.6
@@ -1262,7 +1260,7 @@ packages:
       ajv: 6.12.6
       debug: 4.3.4
       espree: 9.4.1
-      globals: 13.18.0
+      globals: 13.19.0
       ignore: 5.2.1
       import-fresh: 3.3.0
       js-yaml: 4.1.0
@@ -1397,7 +1395,7 @@ packages:
     dependencies:
       '@types/http-cache-semantics': 4.0.1
       '@types/keyv': 3.1.4
-      '@types/node': 18.11.12
+      '@types/node': 18.11.15
       '@types/responselike': 1.0.0
     dev: false
 
@@ -1408,22 +1406,22 @@ packages:
   /@types/keyv/3.1.4:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
     dependencies:
-      '@types/node': 18.11.12
+      '@types/node': 18.11.15
     dev: false
 
-  /@types/node/18.11.12:
-    resolution: {integrity: sha512-FgD3NtTAKvyMmD44T07zz2fEf+OKwutgBCEVM8GcvMGVGaDktiLNTDvPwC/LUe3PinMW+X6CuLOF2Ui1mAlSXg==}
+  /@types/node/18.11.15:
+    resolution: {integrity: sha512-VkhBbVo2+2oozlkdHXLrb3zjsRkpdnaU2bXmX8Wgle3PUi569eLRaHGlgETQHR7lLL1w7GiG3h9SnePhxNDecw==}
 
   /@types/qrcode/1.5.0:
     resolution: {integrity: sha512-x5ilHXRxUPIMfjtM+1vf/GPTRWZ81nqscursm5gMznJeK9M0YnZ1c3bEvRLQ0zSSgedLx1J6MGL231ObQGGhaA==}
     dependencies:
-      '@types/node': 18.11.12
+      '@types/node': 18.11.15
     dev: true
 
   /@types/responselike/1.0.0:
     resolution: {integrity: sha512-85Y2BjiufFzaMIlvJDvTTB8Fxl2xfLo4HgmHzVBz08w4wDePCTjYw66PdrolO0kzli3yam/YCgRufyo1DdQVTA==}
     dependencies:
-      '@types/node': 18.11.12
+      '@types/node': 18.11.15
     dev: false
 
   /acorn-jsx/5.3.2_acorn@8.8.1:
@@ -1556,7 +1554,7 @@ packages:
     dependencies:
       caniuse-lite: 1.0.30001439
       electron-to-chromium: 1.4.284
-      node-releases: 2.0.6
+      node-releases: 2.0.7
       update-browserslist-db: 1.0.10_browserslist@4.21.4
     dev: true
 
@@ -1677,11 +1675,6 @@ packages:
     dependencies:
       browserslist: 4.21.4
     dev: true
-
-  /core-js/3.26.1:
-    resolution: {integrity: sha512-21491RRQVzUn0GGM9Z1Jrpr6PNPxPi+Za8OM9q4tksTSnlbXXGKK1nXNg/QvwFYettXvSX6zWKCtHHfjN4puyA==}
-    requiresBuild: true
-    dev: false
 
   /create-require/1.1.1:
     resolution: {integrity: sha512-dcKFX3jn0MpIaXjisoRvexIJVEKzaq7z2rZKxf+MSr9TkdmHmsU4m2lcLojrj/FHl8mk5VxMmYA+ftRkP/3oKQ==}
@@ -1857,7 +1850,7 @@ packages:
       file-entry-cache: 6.0.1
       find-up: 5.0.0
       glob-parent: 6.0.2
-      globals: 13.18.0
+      globals: 13.19.0
       grapheme-splitter: 1.0.4
       ignore: 5.2.1
       import-fresh: 3.3.0
@@ -2046,8 +2039,8 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /globals/13.18.0:
-    resolution: {integrity: sha512-/mR4KI8Ps2spmoc0Ulu9L7agOF0du1CZNQ3dke8yItYlyKNmGrkONemBbd6V8UTc1Wgcqn21t3WYB7dbRmh6/A==}
+  /globals/13.19.0:
+    resolution: {integrity: sha512-dkQ957uSRWHw7CFXLUtUHQI3g3aWApYhfNR2O6jn/907riyTYKVBmxYVROkBcY614FSSeSJh7Xm7SrUWCxvJMQ==}
     engines: {node: '>=8'}
     dependencies:
       type-fest: 0.20.2
@@ -2299,8 +2292,8 @@ packages:
     resolution: {integrity: sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==}
     dev: true
 
-  /node-releases/2.0.6:
-    resolution: {integrity: sha512-PiVXnNuFm5+iYkLBNeq5211hvO38y63T0i2KKh2KnUs3RpzJ+JtODFjkD8yjLwnDkTYF1eKXheUwdssR+NRZdg==}
+  /node-releases/2.0.7:
+    resolution: {integrity: sha512-EJ3rzxL9pTWPjk5arA0s0dgXpnyiAbJDE6wHT62g7VsgrgQgmmZ+Ru++M1BFofncWja+Pnn3rEr3fieRySAdKQ==}
     dev: true
 
   /normalize-path/3.0.0:
@@ -2659,7 +2652,7 @@ packages:
     dev: true
     optional: true
 
-  /ts-node/10.9.1_r65g46xrm45gbuklnvp6xevc2y:
+  /ts-node/10.9.1_ewfw2lwfc3dwdvz7r6yz2ssqyi:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -2678,7 +2671,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.3
-      '@types/node': 18.11.12
+      '@types/node': 18.11.15
       acorn: 8.8.1
       acorn-walk: 8.2.0
       arg: 4.1.3
