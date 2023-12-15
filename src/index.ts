@@ -1,6 +1,15 @@
 import QRCode from 'qrcode';
 import { cookieJar } from './net';
 
+const KEY_SEC = {
+  '783bbb7264451d82': '2653583c8873dea268ab9386918b1d65',
+  '8d23902c1688a798': '710f0212e62bd499b8d3ac6e1db9302a',
+  bca7e84c2d947ac6: '60698ba2f68e01ce44738920a0ffe768',
+  '27eb53fc9058f8c3': 'c2ed53a74eeefe3cf99fbd01d8c9c375',
+  '4409e2ce8ffd12b8': '59b43e04ad6965f34319062b478f83dd',
+  dfca71928277209b: 'b5475a8825547a4fc26c7d518eaaa02e',
+};
+
 function printQRCode(url: string) {
   QRCode.toString(url, { type: 'utf8' }, function (err, code) {
     console.log(code);
@@ -9,7 +18,7 @@ function printQRCode(url: string) {
   });
 }
 
-export function mbLogin() {
+export function mbLogin(appkey = '783bbb7264451d82', appsec = KEY_SEC[appkey]) {
   return new Promise<
     | {
         mid: number;
@@ -19,8 +28,9 @@ export function mbLogin() {
       }
     | undefined
   >(async (resolve, reject) => {
+    if (!appkey || !appsec) return reject('Invalid appkey or appsec');
     const { getAuthCode, getPoll } = await import('./mb-net');
-    const { data, code, message } = await getAuthCode();
+    const { data, code, message } = await getAuthCode(appkey, appsec);
     if (code !== 0) {
       return reject(new Error(`${code}: ${message}`));
     }
@@ -28,7 +38,7 @@ export function mbLogin() {
     printQRCode(url);
     let count = 0;
     const timer = setInterval(async () => {
-      const { data, code, message } = await getPoll(auth_code);
+      const { data, code, message } = await getPoll(auth_code, appkey, appsec);
       if (code === 86038) {
         clearInterval(timer);
         console.log(message);

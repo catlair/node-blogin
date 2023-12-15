@@ -2,7 +2,7 @@ import { createRequest } from '@catlair/node-got';
 import { BaseResponse, cookieJar } from './net';
 import { getSign, getUnixTime, random } from './utils';
 
-const v1 = random(6, 7),
+const v1 = 7,
   v2 = random(50, 80),
   v3 = random(0, 9);
 
@@ -68,8 +68,8 @@ function createRandomMBUA() {
 
 export function getAppSign(
   params: Record<string, string | boolean | number | Array<any>>,
-  appkey = '4409e2ce8ffd12b8',
-  appsec = '59b43e04ad6965f34319062b478f83dd',
+  appkey = '783bbb7264451d82',
+  appsec = '2653583c8873dea268ab9386918b1d65',
 ) {
   return getSign(
     {
@@ -89,16 +89,19 @@ export function getAppSign(
   );
 }
 
-export async function getAuthCode() {
+export async function getAuthCode(appkey: string, appsec: string) {
   return mobileHttp.post<
     BaseResponse<{
       auth_code: string;
       url: string;
     }>
-  >('https://passport.bilibili.com/x/passport-tv-login/qrcode/auth_code', getAppSign({}));
+  >(
+    'https://passport.bilibili.com/x/passport-tv-login/qrcode/auth_code',
+    getAppSign({}, appkey, appsec),
+  );
 }
 
-export async function getPoll(authCode: string) {
+export async function getPoll(authCode: string, appkey: string, appsec: string) {
   return mobileHttp.post<
     BaseResponse<{
       mid: number;
@@ -108,8 +111,12 @@ export async function getPoll(authCode: string) {
     }>
   >(
     'https://passport.bilibili.com/x/passport-tv-login/qrcode/poll',
-    getAppSign({
-      auth_code: authCode,
-    }),
+    getAppSign(
+      {
+        auth_code: authCode,
+      },
+      appkey,
+      appsec,
+    ),
   );
 }
