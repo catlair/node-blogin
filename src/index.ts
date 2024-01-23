@@ -8,7 +8,7 @@ const KEY_SEC = {
   '27eb53fc9058f8c3': 'c2ed53a74eeefe3cf99fbd01d8c9c375',
   '4409e2ce8ffd12b8': '59b43e04ad6965f34319062b478f83dd',
   dfca71928277209b: 'b5475a8825547a4fc26c7d518eaaa02e',
-};
+} as const;
 
 function printQRCode(url: string) {
   QRCode.toString(url, { type: 'utf8' }, function (err, code) {
@@ -32,7 +32,7 @@ export function mbLogin(appkey = '783bbb7264451d82', appsec = KEY_SEC[appkey]) {
     const { getAuthCode, getPoll } = await import('./mb-net');
     const { data, code, message } = await getAuthCode(appkey, appsec);
     if (code !== 0) {
-      return reject(new Error(`${code}: ${message}`));
+      return reject(new Error(`getAuthCode ${code}: ${message}`));
     }
     const { auth_code, url } = data;
     printQRCode(url);
@@ -72,7 +72,7 @@ export function pcLogin() {
     const { generateQRCode, pollQRCode, getCookie } = await import('./pc-net');
     const { data, code, message } = await generateQRCode();
     if (code !== 0) {
-      return reject(new Error(`${code}: ${message}`));
+      return reject(new Error(`generateQRCode ${code}: ${message}`));
     }
     const { qrcode_key, url } = data;
     printQRCode(url);
@@ -112,4 +112,33 @@ export function pcLogin() {
       count++;
     }, 3000);
   });
+}
+
+export async function cookieToToken(
+  cookie: string,
+  buvid,
+  appkey = '783bbb7264451d82',
+  appsec = KEY_SEC[appkey],
+) {
+  if (!appkey || !appsec) throw new Error('Invalid appkey or appsec');
+  const { getAuthCode, getPoll, confirmQrcode } = await import('./mb-net');
+
+  const authCode = await _getAuthCode();
+  await _confirmQrcode();
+  return await getPoll(authCode, appkey, appsec);
+
+  async function _getAuthCode() {
+    const { data, code, message } = await getAuthCode(appkey, appsec);
+    if (code !== 0) {
+      throw new Error(`getAuthCode ${code}: ${message}`);
+    }
+    return data.auth_code;
+  }
+
+  async function _confirmQrcode() {
+    const { code, message } = await confirmQrcode(authCode, cookie, buvid);
+    if (code !== 0) {
+      throw new Error(`confirmQrcode ${code}: ${message}`);
+    }
+  }
 }

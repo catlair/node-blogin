@@ -8,6 +8,32 @@ const v1 = 7,
 
 const build = `${v1}${v2}0${v3}00`;
 
+interface LoginInfo {
+  mid: number;
+  is_new: boolean;
+  access_token: string;
+  refresh_token: string;
+  expires_in: number;
+  token_info: {
+    mid: number;
+    access_token: string;
+    refresh_token: string;
+    expires_in: number;
+  };
+  cookie_info: {
+    cookies: {
+      name: 'SESSDATA' | 'bili_jct' | 'DedeUserID' | 'DedeUserID__ckMd5' | 'sid';
+      value: string;
+      http_only: number;
+      expires: number;
+      secure: number;
+    }[];
+    domains: string[];
+  };
+  sso: string[];
+  hint: string;
+}
+
 const mobileHttp = createRequest({
   timeout: 10000,
   headers: {
@@ -102,14 +128,7 @@ export async function getAuthCode(appkey: string, appsec: string) {
 }
 
 export async function getPoll(authCode: string, appkey: string, appsec: string) {
-  return mobileHttp.post<
-    BaseResponse<{
-      mid: number;
-      access_token: string;
-      refresh_token: string;
-      expires_in: number;
-    }>
-  >(
+  return mobileHttp.post<BaseResponse<LoginInfo>>(
     'https://passport.bilibili.com/x/passport-tv-login/qrcode/poll',
     getAppSign(
       {
@@ -118,5 +137,21 @@ export async function getPoll(authCode: string, appkey: string, appsec: string) 
       appkey,
       appsec,
     ),
+  );
+}
+
+export async function confirmQrcode(
+  authCode: string,
+  cookie: string,
+  appBuild: string | number = build,
+) {
+  await cookieJar.setCookie(cookie.split(';'));
+  return mobileHttp.post<BaseResponse<LoginInfo>>(
+    'https://passport.bilibili.com/x/passport-tv-login/h5/qrcode/confirm',
+    {
+      auth_code: authCode,
+      build: appBuild,
+      csrf: cookieJar.getCookieItem('bili_jct'),
+    },
   );
 }

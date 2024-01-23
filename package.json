@@ -1,6 +1,6 @@
 {
   "name": "@catlair/blogin",
-  "version": "0.0.8",
+  "version": "0.2.0",
   "description": "bilibili qrcode login",
   "main": "index.js",
   "types": "index.d.ts",

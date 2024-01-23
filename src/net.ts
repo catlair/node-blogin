@@ -2,9 +2,9 @@ import { CookieJar } from '@catlair/node-got/cookie';
 
 export const cookieJar: {
   getCookieString: () => Promise<string>;
-  setCookie: (rawCookie: string) => Promise<unknown>;
+  setCookie: (rawCookie: string[] | string) => Promise<unknown>;
   getCookieItem: (key: string) => string;
-} = new CookieJar();
+} = new CookieJar('');
 
 export type BaseResponse<T> = {
   code: number;
