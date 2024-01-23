@@ -1,4 +1,5 @@
-export default function () {
+export default function (api) {
+  api.cache(true);
   return {
     presets: [
       [
