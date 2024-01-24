@@ -1,4 +1,3 @@
-import QRCode from 'qrcode';
 import { cookieJar } from './net';
 
 const KEY_SEC = {
@@ -10,12 +9,19 @@ const KEY_SEC = {
   dfca71928277209b: 'b5475a8825547a4fc26c7d518eaaa02e',
 } as const;
 
-function printQRCode(url: string) {
-  QRCode.toString(url, { type: 'utf8' }, function (err, code) {
-    console.log(code);
-    console.log(url);
-    console.log('请使用手机扫描二维码登录');
-  });
+async function printQRCode(url: string) {
+  try {
+    const QRCode = await import('qrcode');
+
+    QRCode.toString(url, { type: 'utf8' }, function (_err, code) {
+      console.log(code);
+      console.log(url);
+      console.log('请使用手机扫描二维码登录');
+    });
+  } catch (err) {
+    console.log(`请使用 npm install qrcode 或其他方式安装 qrcode`);
+    console.log(err.message);
+  }
 }
 
 export function mbLogin(appkey = '783bbb7264451d82', appsec = KEY_SEC[appkey]) {
@@ -35,7 +41,7 @@ export function mbLogin(appkey = '783bbb7264451d82', appsec = KEY_SEC[appkey]) {
       return reject(new Error(`getAuthCode ${code}: ${message}`));
     }
     const { auth_code, url } = data;
-    printQRCode(url);
+    await printQRCode(url);
     let count = 0;
     const timer = setInterval(async () => {
       const { data, code, message } = await getPoll(auth_code, appkey, appsec);
@@ -51,7 +57,7 @@ export function mbLogin(appkey = '783bbb7264451d82', appsec = KEY_SEC[appkey]) {
         // 清屏
         console.log('\x1Bc');
         count = 0;
-        printQRCode(url);
+        await printQRCode(url);
       }
       console.log(message);
       count++;
@@ -75,7 +81,7 @@ export function pcLogin() {
       return reject(new Error(`generateQRCode ${code}: ${message}`));
     }
     const { qrcode_key, url } = data;
-    printQRCode(url);
+    await printQRCode(url);
     let count = 0;
     const timer = setInterval(async () => {
       const data = await pollQRCode(qrcode_key);
@@ -106,7 +112,7 @@ export function pcLogin() {
         // 清屏
         console.log('\x1Bc');
         count = 0;
-        printQRCode(url);
+        await printQRCode(url);
       }
       console.log(message);
       count++;
@@ -116,7 +122,7 @@ export function pcLogin() {
 
 export async function cookieToToken(
   cookie: string,
-  buvid,
+  build: string | number,
   appkey = '783bbb7264451d82',
   appsec = KEY_SEC[appkey],
 ) {
@@ -136,7 +142,7 @@ export async function cookieToToken(
   }
 
   async function _confirmQrcode() {
-    const { code, message } = await confirmQrcode(authCode, cookie, buvid);
+    const { code, message } = await confirmQrcode(authCode, cookie, build);
     if (code !== 0) {
       throw new Error(`confirmQrcode ${code}: ${message}`);
     }

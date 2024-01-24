@@ -8,7 +8,7 @@ const v1 = 7,
 
 const build = `${v1}${v2}0${v3}00`;
 
-interface LoginInfo {
+export interface LoginInfo {
   mid: number;
   is_new: boolean;
   access_token: string;
