@@ -6,7 +6,7 @@ const log = (resp: any) => console.log(JSON.stringify(resp, null, 2));
 (async () => {
   const cmd = process.argv[2];
   switch (cmd) {
-    case 'md': {
+    case 'mb': {
       console.log('获取 access_token');
       const resp = await mbLogin(process.argv[3], process.argv[4]);
       log(resp);
