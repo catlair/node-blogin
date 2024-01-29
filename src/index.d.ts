@@ -20,7 +20,7 @@ export function pcLogin(): Promise<{
 
 export function cookieToToken(
   cookie: string,
-  build: string | number,
-  appkey: string,
-  appsec: string,
+  build?: string | number,
+  appkey?: string,
+  appsec?: string,
 ): Promise<BaseResponse<LoginInfo>>;
